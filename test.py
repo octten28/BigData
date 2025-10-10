@@ -1,24 +1,38 @@
-# Databricks Notebook: Modular Data Engineering Starter
+from pyspark.sql import SparkSession
+from pyspark.sql.functions import col, to_date, when, lower
 
-# COMMAND ----------
+# Initialize Spark session
+spark = SparkSession.builder.appName("DataTransformationPipeline").getOrCreate()
 
-# Load sample data
-df = spark.read.csv("/databricks-datasets/samples/population.csv", header=True, inferSchema=True)
-display(df)
+# Load raw data from a CSV file in DBFS or cloud storage
+raw_df = spark.read.option("header", True).csv("/mnt/data/raw/customers.csv")
 
-# COMMAND ----------
+# Step 1: Clean column names
+cleaned_df = raw_df.select(
+    col("CustomerID").alias("customer_id"),
+    col("Name").alias("name"),
+    col("Email").alias("email"),
+    col("SignupDate").alias("signup_date"),
+    col("Status").alias("status")
+)
 
-# Basic transformation
-df_clean = df.dropna().filter(df["Population"] > 1000000)
-df_clean.createOrReplaceTempView("cleaned_population")
+# Step 2: Convert date string to DateType
+cleaned_df = cleaned_df.withColumn("signup_date", to_date(col("signup_date"), "yyyy-MM-dd"))
 
-# COMMAND ----------
+# Step 3: Normalize status values
+cleaned_df = cleaned_df.withColumn(
+    "status",
+    when(lower(col("status")) == "active", "ACTIVE")
+    .when(lower(col("status")) == "inactive", "INACTIVE")
+    .otherwise("UNKNOWN")
+)
 
-# SQL query
-%sql
-SELECT Country, Population FROM cleaned_population ORDER BY Population DESC LIMIT 10
+# Step 4: Filter out rows with missing email
+filtered_df = cleaned_df.filter(col("email").isNotNull())
 
-# COMMAND ----------
+# Step 5: Write transformed data to Delta Lake
+filtered_df.write.format("delta").mode("overwrite").save("/mnt/data/processed/customers")
 
-# Save to Delta Lake
-df_clean.write.format("delta").mode("overwrite").save("/tmp/cleaned_population_delta")
+# Optional: Register as a table for SQL access
+spark.sql("DROP TABLE IF EXISTS customers_cleaned")
+spark.sql("CREATE TABLE customers_cleaned USING DELTA LOCATION '/mnt/data/processed/customers'")
