@@ -1,12 +1,9 @@
-
 # What This Script Does
 # Cleans and renames columns for consistency
 # Converts string dates to proper `DateType`
 # Normalizes status values to uppercase categories
 # Filters out invalid rows (missing email)
 # Saves the result as a Delta table for downstream analytics
-
-
 
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, to_date, when, lower
