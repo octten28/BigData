@@ -1,0 +1,43 @@
+{
+  "name": "XML Table Viewer DevContainer",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:18",
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "18"
+    },
+    "ghcr.io/devcontainers/features/python:1": {
+      "version": "3.11"
+    }
+  },
+  "forwardPorts": [5500, 8000],
+  "postCreateCommand": "npm install -g serve",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ritwickdey.LiveServer",
+        "esbenp.prettier-vscode",
+        "ms-python.python",
+        "ms-vscode.powershell"
+      ],
+      "settings": {
+        "editor.formatOnSave": true,
+        "files.autoSave": "onWindowChange"
+      }
+    }
+  },
+  "remoteUser": "vscode",
+  "mounts": [
+    "source=${localWorkspaceFolder}/docs,target=/workspace/docs,type=bind"
+  ],
+  "workspaceFolder": "/workspace",
+  "portsAttributes": {
+    "5500": {
+      "label": "Live Server",
+      "onAutoForward": "notify"
+    },
+    "8000": {
+      "label": "Python HTTP Server",
+      "onAutoForward": "notify"
+    }
+  }
+}
