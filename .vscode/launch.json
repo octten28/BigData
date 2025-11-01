@@ -1,0 +1,16 @@
+{
+  "name": "Dev Container with PowerShell",
+  "features": {
+    "powershell": {}
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-vscode.PowerShell"
+      ]
+    }
+},
+"configurations": [
+
+]
+}
