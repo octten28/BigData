@@ -7,7 +7,7 @@
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to right, #ffecd2, #fcb69f);
+      background: radial-gradient(circle at center, #fff0f5, #fcb69f);
       text-align: center;
       padding: 50px;
       overflow-x: hidden;
@@ -23,20 +23,6 @@
       font-size: 1.5em;
       margin-bottom: 30px;
       color: #333;
-    }
-
-    button {
-      font-size: 1em;
-      padding: 10px 20px;
-      background-color: #ff4081;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #e91e63;
     }
 
     .confetti-piece {
@@ -95,19 +81,25 @@
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-15px); }
     }
+
+    .burst {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: gold;
+      border-radius: 50%;
+      animation: burst 1.5s ease-out forwards;
+    }
+
+    @keyframes burst {
+      0% { transform: scale(1); opacity: 1; }
+      100% { transform: scale(5); opacity: 0; }
+    }
   </style>
 </head>
 <body>
   <h1>🎂 Happy Birthday, Anastassia Tolentino! 🎉</h1>
   <p class="confetti-message">Wishing you joy, success, and lots of cake!</p>
-
-  <button id="playButton">🎵 Play Birthday Song</button>
-  <br><br>
-  <audio id="birthdaySong">
-    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_9c1b6d6b7e.mp3?filename=happy-birthday-122566.mp3" type="audio/mp3">
-    Your browser does not support the audio element.
-  </audio>
-
   <div class="cake">🎂</div>
 
   <script>
@@ -149,14 +141,16 @@
       document.body.appendChild(star);
     }
 
-    // Audio playback
-    document.getElementById('playButton').addEventListener('click', () => {
-      const song = document.getElementById('birthdaySong');
-      song.play().catch(err => {
-        alert("Playback failed. Try clicking the button again or check your browser settings.");
-        console.error("Audio playback error:", err);
-      });
-    });
+    // Firework-style bursts
+    function createBurst() {
+      const burst = document.createElement('div');
+      burst.className = 'burst';
+      burst.style.left = Math.random() * window.innerWidth + 'px';
+      burst.style.top = Math.random() * window.innerHeight + 'px';
+      document.body.appendChild(burst);
+      setTimeout(() => burst.remove(), 1500);
+    }
+    setInterval(createBurst, 800);
   </script>
 </body>
 </html>
