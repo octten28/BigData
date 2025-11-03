@@ -1,20 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-
-  <title>JSON Table Viewer</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy Birthday Anastassia!</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #ffecd2, #fcb69f);
+      text-align: center;
+      padding: 50px;
+    }
+    h1 {
+      font-size: 3em;
+      color: #ff4081;
+    }
+    .confetti {
+      font-size: 2em;
+      animation: float 2s infinite ease-in-out;
+    }
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+      100% { transform: translateY(0); }
+    }
+  </style>
 </head>
 <body>
-  <h1>JSON Table Viewer</h1>
-  <h2>Add New Record</h2>
-<input type="text" id="name" placeholder="Name">
-<input type="text" id="role" placeholder="Role">
-<input type="text" id="location" placeholder="Location">
-<button onclick="addRecord()">Add</button>
+  <h1>🎂 Happy Birthday, Anastassia Tolentino! 🎉</h1>
+  <p class="confetti">✨ Wishing you joy, success, and lots of cake! ✨</p>
+  <button onclick="playSong()">Play Birthday Song</button>
+  <audio id="birthdaySong" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
 
-  <div id="json-table"></div>
-  <script src="script.js"></script>
+  <script>
+    function playSong() {
+      const song = document.getElementById('birthdaySong');
+      song.play();
+    }
+  </script>
 </body>
 </html>
