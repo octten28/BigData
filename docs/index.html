@@ -11,6 +11,7 @@
       text-align: center;
       padding: 50px;
       overflow-x: hidden;
+      position: relative;
     }
 
     h1 {
@@ -50,6 +51,50 @@
       0% { transform: translateY(0); opacity: 1; }
       100% { transform: translateY(300px); opacity: 0; }
     }
+
+    .balloon {
+      position: absolute;
+      width: 40px;
+      height: 60px;
+      background: radial-gradient(circle at 30% 30%, #ff69b4, #ff1493);
+      border-radius: 50%;
+      animation: floatBalloon 6s ease-in-out infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes floatBalloon {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-100px); }
+      100% { transform: translateY(0); }
+    }
+
+    .star {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.8;
+      animation: twinkle 2s infinite ease-in-out;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.2; }
+      50% { opacity: 1; }
+    }
+
+    .cake {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      font-size: 2em;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
   </style>
 </head>
 <body>
@@ -63,6 +108,8 @@
     Your browser does not support the audio element.
   </audio>
 
+  <div class="cake">🎂</div>
+
   <script>
     // Confetti
     for (let i = 0; i < 30; i++) {
@@ -71,6 +118,35 @@
       confetti.style.left = Math.random() * window.innerWidth + 'px';
       confetti.style.top = Math.random() * -100 + 'px';
       document.body.appendChild(confetti);
+    }
+
+    // Balloons
+    function createBalloon() {
+      const balloon = document.createElement('div');
+      balloon.className = 'balloon';
+      balloon.style.left = Math.random() * window.innerWidth + 'px';
+      balloon.style.top = window.innerHeight + 'px';
+      document.body.appendChild(balloon);
+
+      let rise = setInterval(() => {
+        const top = parseFloat(balloon.style.top);
+        if (top < -100) {
+          clearInterval(rise);
+          balloon.remove();
+        } else {
+          balloon.style.top = (top - 2) + 'px';
+        }
+      }, 30);
+    }
+    setInterval(createBalloon, 1000);
+
+    // Stars
+    for (let i = 0; i < 50; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      star.style.left = Math.random() * window.innerWidth + 'px';
+      star.style.top = Math.random() * window.innerHeight + 'px';
+      document.body.appendChild(star);
     }
 
     // Audio playback
