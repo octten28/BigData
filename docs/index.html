@@ -56,14 +56,15 @@
   <h1>🎂 Happy Birthday, Anastassia Tolentino! 🎉</h1>
   <p class="confetti-message">Wishing you joy, success, and lots of cake!</p>
 
-  <button onclick="document.getElementById('birthdaySong').play()">🎵 Play Birthday Song</button>
+  <button id="playButton">🎵 Play Birthday Song</button>
   <br><br>
-  <audio id="birthdaySong" controls>
-    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_9c1b6d6b7e.mp3?filename=happy-birthday-122566.mp3" type="audio/mp3">
+  <audio id="birthdaySong">
+    <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_9c1b6d6b7e.mp3" type="audio/mp3">
     Your browser does not support the audio element.
   </audio>
 
   <script>
+    // Confetti
     for (let i = 0; i < 30; i++) {
       const confetti = document.createElement('div');
       confetti.className = 'confetti-piece';
@@ -71,6 +72,15 @@
       confetti.style.top = Math.random() * -100 + 'px';
       document.body.appendChild(confetti);
     }
+
+    // Audio playback on button click
+    document.getElementById('playButton').addEventListener('click', () => {
+      const song = document.getElementById('birthdaySong');
+      song.play().catch(err => {
+        alert("Playback failed. Try clicking the button again or check your browser settings.");
+        console.error("Audio playback error:", err);
+      });
+    });
   </script>
 </body>
 </html>
