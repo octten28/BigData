@@ -4,39 +4,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Happy Birthday Anastassia!</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to right, #ffecd2, #fcb69f);
-      text-align: center;
-      padding: 50px;
-    }
-    h1 {
-      font-size: 3em;
-      color: #ff4081;
-    }
-    .confetti {
-      font-size: 2em;
-      animation: float 2s infinite ease-in-out;
-    }
-    @keyframes float {
-      0% { transform: translateY(0); }
-      50% { transform: translateY(-20px); }
-      100% { transform: translateY(0); }
-    }
-  </style>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <h1>🎂 Happy Birthday, Anastassia Tolentino! 🎉</h1>
-  <p class="confetti">✨ Wishing you joy, success, and lots of cake! ✨</p>
-  <button onclick="playSong()">Play Birthday Song</button>
-  <audio id="birthdaySong" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
+  <p class="confetti-message">Wishing you joy, success, and lots of cake!</p>
 
-  <script>
-    function playSong() {
-      const song = document.getElementById('birthdaySong');
-      song.play();
-    }
-  </script>
+  <button onclick="document.getElementById('birthdaySong').play()">🎵 Play Birthday Song</button>
+  <audio id="birthdaySong" controls>
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_9c1b6d6b7e.mp3?filename=happy-birthday-122566.mp3" type="audio/mp3">
+    Your browser does not support the audio element.
+  </audio>
+
+  <script src="confetti.js"></script>
 </body>
 </html>
