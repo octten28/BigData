@@ -95,12 +95,39 @@
       0% { transform: scale(1); opacity: 1; }
       100% { transform: scale(5); opacity: 0; }
     }
+
+    .dragon {
+      position: fixed;
+      top: 100px;
+      left: -100px;
+      font-size: 3em;
+      animation: flyDragon 12s linear infinite;
+      z-index: 10;
+    }
+
+    @keyframes flyDragon {
+      0% {
+        transform: translateX(0) translateY(0) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      50% {
+        transform: translateX(50vw) translateY(-50px) rotate(10deg);
+      }
+      100% {
+        transform: translateX(100vw) translateY(0) rotate(-10deg);
+        opacity: 0;
+      }
+    }
   </style>
 </head>
 <body>
   <h1>🎂 Happy Birthday, Anastassia Tolentino! 🎉</h1>
   <p class="confetti-message">Wishing you joy, success, and lots of cake!</p>
   <div class="cake">🎂</div>
+  <div class="dragon">🐉</div>
 
   <script>
     // Confetti
