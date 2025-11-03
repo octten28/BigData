@@ -102,39 +102,43 @@
       100% { transform: scale(5); opacity: 0; }
     }
 
-    .scene {
-      perspective: 1000px;
-      position: fixed;
-      top: 120px;
-      left: 0;
-      width: 100%;
-      height: 200px;
-      pointer-events: none;
-      z-index: 1000;
-    }
-
-    .dragon-3d {
+    .dragon {
       position: absolute;
-      font-size: 4em;
-      transform-style: preserve-3d;
-      animation: dragon3D 15s linear infinite;
+      font-size: 3em;
+      animation: flyDragon 20s linear infinite;
+      pointer-events: none;
     }
 
-    @keyframes dragon3D {
+    @keyframes flyDragon {
       0% {
-        transform: rotateY(0deg) translateZ(0px) translateX(-100px);
+        transform: translateX(-100px) translateY(0) rotate(0deg);
         opacity: 0;
       }
       10% {
         opacity: 1;
       }
       50% {
-        transform: rotateY(180deg) translateZ(200px) translateX(50vw);
+        transform: translateX(50vw) translateY(-50px) rotate(10deg);
       }
       100% {
-        transform: rotateY(360deg) translateZ(0px) translateX(100vw);
+        transform: translateX(100vw) translateY(0) rotate(-10deg);
         opacity: 0;
       }
+    }
+
+    .butterfly {
+      position: absolute;
+      font-size: 2em;
+      animation: flutter 8s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes flutter {
+      0% { transform: translateY(0) rotate(0deg); opacity: 0.5; }
+      25% { transform: translateY(-30px) rotate(10deg); opacity: 1; }
+      50% { transform: translateY(0) rotate(-10deg); }
+      75% { transform: translateY(30px) rotate(5deg); }
+      100% { transform: translateY(0) rotate(0deg); opacity: 0.5; }
     }
   </style>
 </head>
@@ -142,10 +146,6 @@
   <h1>🎂 Happy Birthday, Anastassia Tolentino! 🎉</h1>
   <p class="confetti-message">Wishing you joy, success, and lots of cake!</p>
   <div class="cake">🎂</div>
-  <div class="scene">
-    <div class="dragon-3d">🐉</div>
-  </div>
-
   <p class="credit">Made by Adrian Tolentino using JavaScript, CSS, and HTML</p>
 
   <script>
@@ -187,7 +187,7 @@
       document.body.appendChild(star);
     }
 
-    // Firework-style bursts
+    // Bursts
     function createBurst() {
       const burst = document.createElement('div');
       burst.className = 'burst';
@@ -197,6 +197,28 @@
       setTimeout(() => burst.remove(), 1500);
     }
     setInterval(createBurst, 800);
+
+    // Dragons
+    for (let i = 0; i < 5; i++) {
+      const dragon = document.createElement('div');
+      dragon.className = 'dragon';
+      dragon.textContent = '🐉';
+      dragon.style.top = (100 + i * 60) + 'px';
+      dragon.style.left = '-100px';
+      dragon.style.animationDelay = (i * 3) + 's';
+      document.body.appendChild(dragon);
+    }
+
+    // Butterflies
+    for (let i = 0; i < 10; i++) {
+      const butterfly = document.createElement('div');
+      butterfly.className = 'butterfly';
+      butterfly.textContent = '🦋';
+      butterfly.style.left = Math.random() * window.innerWidth + 'px';
+      butterfly.style.top = Math.random() * window.innerHeight + 'px';
+      butterfly.style.animationDelay = (i * 0.5) + 's';
+      document.body.appendChild(butterfly);
+    }
   </script>
 </body>
 </html>
