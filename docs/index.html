@@ -59,7 +59,7 @@
   <button id="playButton">🎵 Play Birthday Song</button>
   <br><br>
   <audio id="birthdaySong">
-    <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_9c1b6d6b7e.mp3" type="audio/mp3">
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_9c1b6d6b7e.mp3?filename=happy-birthday-122566.mp3" type="audio/mp3">
     Your browser does not support the audio element.
   </audio>
 
@@ -73,7 +73,7 @@
       document.body.appendChild(confetti);
     }
 
-    // Audio playback on button click
+    // Audio playback
     document.getElementById('playButton').addEventListener('click', () => {
       const song = document.getElementById('birthdaySong');
       song.play().catch(err => {
