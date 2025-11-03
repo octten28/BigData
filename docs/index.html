@@ -96,29 +96,37 @@
       100% { transform: scale(5); opacity: 0; }
     }
 
-    .dragon {
+    .scene {
+      perspective: 1000px;
       position: fixed;
       top: 120px;
-      left: -100px;
-      font-size: 4em;
-      animation: flyDragon 15s linear infinite;
-      z-index: 1000;
+      left: 0;
+      width: 100%;
+      height: 200px;
       pointer-events: none;
+      z-index: 1000;
     }
 
-    @keyframes flyDragon {
+    .dragon-3d {
+      position: absolute;
+      font-size: 4em;
+      transform-style: preserve-3d;
+      animation: dragon3D 15s linear infinite;
+    }
+
+    @keyframes dragon3D {
       0% {
-        transform: translateX(0) translateY(0) rotate(0deg);
+        transform: rotateY(0deg) translateZ(0px) translateX(-100px);
         opacity: 0;
       }
       10% {
         opacity: 1;
       }
       50% {
-        transform: translateX(50vw) translateY(-50px) rotate(10deg);
+        transform: rotateY(180deg) translateZ(200px) translateX(50vw);
       }
       100% {
-        transform: translateX(100vw) translateY(0) rotate(-10deg);
+        transform: rotateY(360deg) translateZ(0px) translateX(100vw);
         opacity: 0;
       }
     }
@@ -128,7 +136,9 @@
   <h1>🎂 Happy Birthday, Anastassia Tolentino! 🎉</h1>
   <p class="confetti-message">Wishing you joy, success, and lots of cake!</p>
   <div class="cake">🎂</div>
-  <div class="dragon">🐉</div>
+  <div class="scene">
+    <div class="dragon-3d">🐉</div>
+  </div>
 
   <script>
     // Confetti
