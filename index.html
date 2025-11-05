@@ -8,29 +8,24 @@
     body {
       margin: 0;
       background: radial-gradient(circle at center, #000 0%, #111 100%);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      perspective: 1200px;
       overflow: hidden;
       font-family: sans-serif;
       color: white;
+      height: 100vh;
+      width: 100vw;
+      position: relative;
     }
 
-    .container {
-      position: relative;
-      width: 100%;
-      height: 100%;
+    .cube-wrapper {
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      animation: bounceAround 8s ease-in-out infinite;
     }
 
     .scene {
       width: 300px;
       height: 300px;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
       transform-style: preserve-3d;
       animation: rotateCube 12s linear infinite;
     }
@@ -48,50 +43,34 @@
       backface-visibility: hidden;
       text-shadow: 0 0 10px white;
       border: 2px solid white;
-      animation: colorShift 4s infinite alternate;
     }
 
-    .front  { transform: translateZ(150px); animation-name: colorFront; }
-    .back   { transform: rotateY(180deg) translateZ(150px); animation-name: colorBack; }
-    .right  { transform: rotateY(90deg) translateZ(150px); animation-name: colorRight; }
-    .left   { transform: rotateY(-90deg) translateZ(150px); animation-name: colorLeft; }
-    .top    { transform: rotateX(90deg) translateZ(150px); animation-name: colorTop; }
-    .bottom { transform: rotateX(-90deg) translateZ(150px); animation-name: colorBottom; }
+    .front  { transform: translateZ(150px); animation: colorFront 4s infinite alternate; }
+    .back   { transform: rotateY(180deg) translateZ(150px); animation: colorBack 4s infinite alternate; }
+    .right  { transform: rotateY(90deg) translateZ(150px); animation: colorRight 4s infinite alternate; }
+    .left   { transform: rotateY(-90deg) translateZ(150px); animation: colorLeft 4s infinite alternate; }
+    .top    { transform: rotateX(90deg) translateZ(150px); animation: colorTop 4s infinite alternate; }
+    .bottom { transform: rotateX(-90deg) translateZ(150px); animation: colorBottom 4s infinite alternate; }
 
     @keyframes rotateCube {
       0%   { transform: rotateX(0deg) rotateY(0deg); }
       100% { transform: rotateX(360deg) rotateY(360deg); }
     }
 
-    @keyframes colorFront {
-      0% { background: #ff0040; }
-      100% { background: #ff8000; }
+    @keyframes bounceAround {
+      0%   { top: 0; left: 0; }
+      25%  { top: 0; left: calc(100vw - 300px); }
+      50%  { top: calc(100vh - 300px); left: calc(100vw - 300px); }
+      75%  { top: calc(100vh - 300px); left: 0; }
+      100% { top: 0; left: 0; }
     }
 
-    @keyframes colorBack {
-      0% { background: #00ffcc; }
-      100% { background: #0099ff; }
-    }
-
-    @keyframes colorRight {
-      0% { background: #ffff00; }
-      100% { background: #ff00ff; }
-    }
-
-    @keyframes colorLeft {
-      0% { background: #00ff00; }
-      100% { background: #00ffff; }
-    }
-
-    @keyframes colorTop {
-      0% { background: #ffcc00; }
-      100% { background: #ff3399; }
-    }
-
-    @keyframes colorBottom {
-      0% { background: #6600ff; }
-      100% { background: #cc00ff; }
-    }
+    @keyframes colorFront   { 0% { background: #ff0040; } 100% { background: #ff8000; } }
+    @keyframes colorBack    { 0% { background: #00ffcc; } 100% { background: #0099ff; } }
+    @keyframes colorRight   { 0% { background: #ffff00; } 100% { background: #ff00ff; } }
+    @keyframes colorLeft    { 0% { background: #00ff00; } 100% { background: #00ffff; } }
+    @keyframes colorTop     { 0% { background: #ffcc00; } 100% { background: #ff3399; } }
+    @keyframes colorBottom  { 0% { background: #6600ff; } 100% { background: #cc00ff; } }
 
     .spark {
       position: absolute;
@@ -99,10 +78,7 @@
       height: 12px;
       background: white;
       border-radius: 50%;
-      box-shadow:
-        0 0 10px white,
-        0 0 20px white,
-        0 0 30px white;
+      box-shadow: 0 0 10px white, 0 0 20px white, 0 0 30px white;
       animation: sparkMove 1s infinite ease-in-out;
       opacity: 0.9;
     }
@@ -116,7 +92,7 @@
     }
 
     footer {
-      position: absolute;
+      position: fixed;
       bottom: 10px;
       width: 100%;
       text-align: center;
@@ -128,7 +104,7 @@
   </style>
 </head>
 <body>
-  <div class="container">
+  <div class="cube-wrapper">
     <div class="scene">
       <div class="face front">Tasha</div>
       <div class="face back">Julian</div>
@@ -144,10 +120,10 @@
       <div class="spark" style="top:80px; left:180px;"></div>
       <div class="spark" style="top:200px; left:60px;"></div>
     </div>
-
-    <footer>
-      Created by Adrian Tolentino using JavaScript, CSS, and HTML
-    </footer>
   </div>
+
+  <footer>
+    Created by Adrian Tolentino using JavaScript, CSS, and HTML
+  </footer>
 </body>
 </html>
