@@ -9,12 +9,14 @@
       margin: 0;
       background: radial-gradient(circle at center, #000 0%, #111 100%);
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       height: 100vh;
       perspective: 1200px;
       overflow: hidden;
       font-family: sans-serif;
+      color: white;
     }
 
     .scene {
@@ -104,6 +106,13 @@
       75%  { transform: translate(20px, -5px) scale(1.3); opacity: 0.9; }
       100% { transform: translate(0, 0) scale(1); opacity: 1; }
     }
+
+    footer {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #ccc;
+      text-shadow: 0 0 5px #fff;
+    }
   </style>
 </head>
 <body>
@@ -122,5 +131,9 @@
     <div class="spark" style="top:80px; left:180px;"></div>
     <div class="spark" style="top:200px; left:60px;"></div>
   </div>
+
+  <footer>
+    Created by Adrian Tolentino using JavaScript, CSS, and HTML
+  </footer>
 </body>
 </html>
