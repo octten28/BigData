@@ -2,41 +2,125 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Welcome to My Codespace</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Electric Cube Tribute</title>
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to right, #4facfe, #00f2fe);
-      color: #fff;
-      text-align: center;
-      padding: 50px;
+      margin: 0;
+      background: radial-gradient(circle at center, #000 0%, #111 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      perspective: 1200px;
+      overflow: hidden;
+      font-family: sans-serif;
     }
-    h1 {
-      font-size: 3em;
-      margin-bottom: 0.5em;
+
+    .scene {
+      width: 300px;
+      height: 300px;
+      position: relative;
+      transform-style: preserve-3d;
+      animation: rotateCube 12s linear infinite;
     }
-    p {
-      font-size: 1.2em;
+
+    .face {
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      box-sizing: border-box;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 28px;
+      color: white;
+      backface-visibility: hidden;
+      text-shadow: 0 0 10px white;
+      border: 2px solid white;
+      animation: colorShift 4s infinite alternate;
     }
-    .button {
-      margin-top: 2em;
-      padding: 10px 20px;
-      font-size: 1em;
-      background-color: #fff;
-      color: #4facfe;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
+
+    .front  { transform: translateZ(150px); animation-name: colorFront; }
+    .back   { transform: rotateY(180deg) translateZ(150px); animation-name: colorBack; }
+    .right  { transform: rotateY(90deg) translateZ(150px); animation-name: colorRight; }
+    .left   { transform: rotateY(-90deg) translateZ(150px); animation-name: colorLeft; }
+    .top    { transform: rotateX(90deg) translateZ(150px); animation-name: colorTop; }
+    .bottom { transform: rotateX(-90deg) translateZ(150px); animation-name: colorBottom; }
+
+    @keyframes rotateCube {
+      0%   { transform: rotateX(0deg) rotateY(0deg); }
+      100% { transform: rotateX(360deg) rotateY(360deg); }
     }
-    .button:hover {
-      background-color: #e0e0e0;
+
+    @keyframes colorFront {
+      0% { background: #ff0040; }
+      100% { background: #ff8000; }
+    }
+
+    @keyframes colorBack {
+      0% { background: #00ffcc; }
+      100% { background: #0099ff; }
+    }
+
+    @keyframes colorRight {
+      0% { background: #ffff00; }
+      100% { background: #ff00ff; }
+    }
+
+    @keyframes colorLeft {
+      0% { background: #00ff00; }
+      100% { background: #00ffff; }
+    }
+
+    @keyframes colorTop {
+      0% { background: #ffcc00; }
+      100% { background: #ff3399; }
+    }
+
+    @keyframes colorBottom {
+      0% { background: #6600ff; }
+      100% { background: #cc00ff; }
+    }
+
+    .spark {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      background: white;
+      border-radius: 50%;
+      box-shadow:
+        0 0 10px white,
+        0 0 20px white,
+        0 0 30px white;
+      animation: sparkMove 1s infinite ease-in-out;
+      opacity: 0.9;
+    }
+
+    @keyframes sparkMove {
+      0%   { transform: translate(0, 0) scale(1); opacity: 1; }
+      25%  { transform: translate(15px, -10px) scale(1.2); opacity: 0.8; }
+      50%  { transform: translate(-10px, 20px) scale(1.1); opacity: 0.6; }
+      75%  { transform: translate(20px, -5px) scale(1.3); opacity: 0.9; }
+      100% { transform: translate(0, 0) scale(1); opacity: 1; }
     }
   </style>
 </head>
 <body>
-  <h1>👋 Welcome to My GitHub Codespace!</h1>
-  <p>This is a sample HTML page running in your development environment.</p>
-  <button class="button" onclick="alert('Thanks for visiting!')">Say Hello</button>
+  <div class="scene">
+    <div class="face front">Tasha</div>
+    <div class="face back">Julian</div>
+    <div class="face right">Jay</div>
+    <div class="face left">Family</div>
+    <div class="face top">Nico</div>
+    <div class="face bottom">Happy for Life</div>
+
+    <!-- Electric sparks -->
+    <div class="spark" style="top:30px; left:30px;"></div>
+    <div class="spark" style="top:250px; left:220px;"></div>
+    <div class="spark" style="top:150px; left:100px;"></div>
+    <div class="spark" style="top:80px; left:180px;"></div>
+    <div class="spark" style="top:200px; left:60px;"></div>
+  </div>
 </body>
 </html>
